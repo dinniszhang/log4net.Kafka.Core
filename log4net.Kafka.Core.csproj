@@ -7,7 +7,7 @@
   <PropertyGroup>
     <PackageId>log4net.Kafka.Core</PackageId>
     <Title>log4net.Kafka.Core</Title>
-    <Version>1.1.4</Version>
+    <Version>1.1.5</Version>
     <Authors>Dinnis</Authors>
     <PackageTags>log4net,Kafka</PackageTags>
     <DebugSymbols>true</DebugSymbols>
@@ -28,14 +28,15 @@
   <ItemGroup>
     <PackageReference Include="Confluent.Kafka" Version="1.2.1" />
     <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="5.0.3" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <PackageReference Include="Confluent.Kafka" Version="1.2.1" />
-    <PackageReference Include="log4net" Version="2.0.8" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Confluent.Kafka" Version="1.7.0" />
+    <PackageReference Include="log4net" Version="2.0.12" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   
