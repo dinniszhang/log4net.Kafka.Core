@@ -43,5 +43,13 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>README.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+
   
 </Project>
