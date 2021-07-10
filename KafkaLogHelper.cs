@@ -14,14 +14,37 @@ namespace log4net.Kafka.Core
     {
 
         private static ILoggerRepository repository { get; set; }
-        private static ILog _log;
-        private static ILog log
+        //private static ILog _log;
+        //private static ILog log
+        //{
+        //    get
+        //    {
+        //        if (_log == null)
+        //        {
+        //            Configure();
+        //        }
+        //        return _log;
+        //    }
+        //}
+
+        private static volatile ILog _log = null;
+        /// <summary>
+        /// 双检锁/双重校验锁（DCL，即 double-checked locking）
+        /// </summary>
+        /// <returns></returns>
+        public static ILog log
         {
             get
             {
-                if (_log == null)
+                if (_log == null)//提高效率
                 {
-                    Configure();
+                    lock (typeof(ILog))
+                    {
+                        if (_log == null) //防止多次创建单例对象
+                        {
+                            Configure();
+                        }
+                    }
                 }
                 return _log;
             }
