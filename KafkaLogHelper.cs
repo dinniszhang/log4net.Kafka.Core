@@ -1,11 +1,12 @@
-﻿using log4net.Config;
+﻿using log4net;
+using log4net.Config;
 using log4net.Repository;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace log4net.Kafka.Core
+namespace cyqf_api_diebiangaokao.Tools
 {
     /// <summary>
     ///  KafkaLogHelper类
@@ -14,39 +15,99 @@ namespace log4net.Kafka.Core
     {
 
         private static ILoggerRepository repository { get; set; }
-        //private static ILog _log;
-        //private static ILog log
-        //{
-        //    get
-        //    {
-        //        if (_log == null)
-        //        {
-        //            Configure();
-        //        }
-        //        return _log;
-        //    }
-        //}
 
-        private static volatile ILog _log = null;
+        private static volatile ILog _logDebug = null;
+        private static volatile ILog _logInfo = null;
+        private static volatile ILog _logWarn = null;
+        private static volatile ILog _logError = null;
+        private static volatile ILog _logFatal = null;
         /// <summary>
         /// 双检锁/双重校验锁（DCL，即 double-checked locking）
         /// </summary>
         /// <returns></returns>
-        public static ILog log
+        public static ILog logDebug
         {
             get
             {
-                if (_log == null)//提高效率
+                if (_logDebug == null)//提高效率
                 {
                     lock (typeof(ILog))
                     {
-                        if (_log == null) //防止多次创建单例对象
+                        if (_logDebug == null) //防止多次创建单例对象
                         {
-                            Configure();
+                            ConfigureDebug();
                         }
                     }
                 }
-                return _log;
+                return _logDebug;
+            }
+        }
+        public static ILog logInfo
+        {
+            get
+            {
+                if (_logInfo == null)//提高效率
+                {
+                    lock (typeof(ILog))
+                    {
+                        if (_logInfo == null) //防止多次创建单例对象
+                        {
+                            ConfigureInfo();
+                        }
+                    }
+                }
+                return _logInfo;
+            }
+        }
+        public static ILog logWarn
+        {
+            get
+            {
+                if (_logWarn == null)//提高效率
+                {
+                    lock (typeof(ILog))
+                    {
+                        if (_logWarn == null) //防止多次创建单例对象
+                        {
+                            ConfigureWarn();
+                        }
+                    }
+                }
+                return _logWarn;
+            }
+        }
+        public static ILog logError
+        {
+            get
+            {
+                if (_logError == null)//提高效率
+                {
+                    lock (typeof(ILog))
+                    {
+                        if (_logError == null) //防止多次创建单例对象
+                        {
+                            ConfigureError();
+                        }
+                    }
+                }
+                return _logError;
+            }
+        }
+        public static ILog logFatal
+        {
+            get
+            {
+                if (_logFatal == null)//提高效率
+                {
+                    lock (typeof(ILog))
+                    {
+                        if (_logFatal == null) //防止多次创建单例对象
+                        {
+                            ConfigureFatal();
+                        }
+                    }
+                }
+                return _logFatal;
             }
         }
         /// <summary>
@@ -54,11 +115,35 @@ namespace log4net.Kafka.Core
         /// </summary>
         /// <param name="repositoryName"></param>
         /// <param name="configFile"></param>
-        public static void Configure(string repositoryName = "NETCoreRepository", string configFile = "log4net.config")
+        public static void ConfigureDebug(string repositoryName = "NETCoreRepository1", string configFile = "log4net.config")
         {
             repository = LogManager.CreateRepository(repositoryName);
             XmlConfigurator.Configure(repository, new FileInfo(configFile));
-            _log = LogManager.GetLogger(repositoryName, "");
+            _logDebug = LogManager.GetLogger(repositoryName, "logDebug");
+        }
+        public static void ConfigureInfo(string repositoryName = "NETCoreRepository2", string configFile = "log4net.config")
+        {
+            repository = LogManager.CreateRepository(repositoryName);
+            XmlConfigurator.Configure(repository, new FileInfo(configFile));
+            _logInfo = LogManager.GetLogger(repositoryName, "logInfo");
+        }
+        public static void ConfigureWarn(string repositoryName = "NETCoreRepository3", string configFile = "log4net.config")
+        {
+            repository = LogManager.CreateRepository(repositoryName);
+            XmlConfigurator.Configure(repository, new FileInfo(configFile));
+            _logWarn = LogManager.GetLogger(repositoryName, "logWarn");
+        }
+        public static void ConfigureError(string repositoryName = "NETCoreRepository4", string configFile = "log4net.config")
+        {
+            repository = LogManager.CreateRepository(repositoryName);
+            XmlConfigurator.Configure(repository, new FileInfo(configFile));
+            _logError = LogManager.GetLogger(repositoryName, "logError");
+        }
+        public static void ConfigureFatal(string repositoryName = "NETCoreRepository5", string configFile = "log4net.config")
+        {
+            repository = LogManager.CreateRepository(repositoryName);
+            XmlConfigurator.Configure(repository, new FileInfo(configFile));
+            _logFatal = LogManager.GetLogger(repositoryName, "logFatal");
         }
 
 
@@ -70,7 +155,7 @@ namespace log4net.Kafka.Core
         /// <param name="e">Exception异常</param>
         public static void Debug(string message, Exception e = null)
         {
-            log.Debug(GetCurrentMethodFullName() + " " + message, e);
+            logDebug.Debug(GetCurrentMethodFullName() + " " + message, e);
         }
 
         /// <summary>
@@ -80,7 +165,7 @@ namespace log4net.Kafka.Core
         /// <param name="e">Exception异常</param>
         public static void Info(string message, Exception e = null)
         {
-            log.Info(GetCurrentMethodFullName() + " " + message, e);
+            logInfo.Info(GetCurrentMethodFullName() + " " + message, e);
         }
         /// <summary>
         /// 警告日志
@@ -89,7 +174,7 @@ namespace log4net.Kafka.Core
         /// <param name="e">Exception异常</param>
         public static void Warn(string message, Exception e = null)
         {
-            log.Warn(GetCurrentMethodFullName() + " " + message, e);
+            logWarn.Warn(GetCurrentMethodFullName() + " " + message, e);
         }
         /// <summary>
         /// 异常日志
@@ -98,7 +183,7 @@ namespace log4net.Kafka.Core
         /// <param name="e">Exception异常</param>
         public static void Error(string message, Exception e = null)
         {
-            log.Error(GetCurrentMethodFullName() + " " + message, e);
+            logError.Error(GetCurrentMethodFullName() + " " + message, e);
         }
         /// <summary>
         /// 灾难日志
@@ -107,7 +192,7 @@ namespace log4net.Kafka.Core
         /// <param name="e">Exception异常</param>
         public static void Fatal(string message, Exception e = null)
         {
-            log.Fatal(GetCurrentMethodFullName() + " " + message, e);
+            logFatal.Fatal(GetCurrentMethodFullName() + " " + message, e);
         }
         /// <summary>
         /// 获取路径及方法名
