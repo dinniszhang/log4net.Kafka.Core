@@ -6,7 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace log4net.Kafka.Core
+namespace cyqf_api_diebiangaokao.Tools
 {
     /// <summary>
     ///  KafkaLogHelper类
