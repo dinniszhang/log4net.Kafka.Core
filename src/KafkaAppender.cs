@@ -91,7 +91,7 @@ namespace log4net.Kafka.Core
                     var config = new ProducerConfig
                     {
                         BootstrapServers = KafkaSettings.Broker,
-                        SslCaLocation = Directory.GetCurrentDirectory() + "\\ca-cert.pem",
+                        SslCaLocation = Directory.GetCurrentDirectory() + "/ca-cert.pem",
                         SecurityProtocol = SecurityProtocol.SaslSsl,
                         SaslMechanism = SaslMechanism.Plain,
                         SaslUsername = KafkaSettings.Username,
