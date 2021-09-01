@@ -26,51 +26,7 @@ log4net.Kafka.Core 的重写,支持账号密码及pem证书
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <log4net>
-  <appender name="DebugAppender" type="log4net.Kafka.Core.KafkaAppender, log4net.Kafka.Core">
-    <KafkaSettings>
-      <broker value="127.0.0.1:9092,127.0.0.1:9093" />
-      <topic value="Log_test1" />
-      <username value="admin"/>
-      <password value="admin"/>
-    </KafkaSettings>
-    <layout type="log4net.Kafka.Core.KafkaLogLayout,log4net.Kafka.Core" >
-      <appid value="cyqf-grpc-test" />
-    </layout>
-  </appender>
-  <appender name="InfoAppender" type="log4net.Kafka.Core.KafkaAppender, log4net.Kafka.Core">
-    <KafkaSettings>
-      <broker value="127.0.0.1:9092,127.0.0.1:9093" />
-      <topic value="Log_test1" />
-      <username value="admin"/>
-      <password value="admin"/>
-    </KafkaSettings>
-    <layout type="log4net.Kafka.Core.KafkaLogLayout,log4net.Kafka.Core" >
-      <appid value="cyqf-grpc-test" />
-    </layout>
-  </appender>
-  <appender name="WarnAppender" type="log4net.Kafka.Core.KafkaAppender, log4net.Kafka.Core">
-    <KafkaSettings>
-      <broker value="127.0.0.1:9092,127.0.0.1:9093" />
-      <topic value="Log_test1" />
-      <username value="admin"/>
-      <password value="admin"/>
-    </KafkaSettings>
-    <layout type="log4net.Kafka.Core.KafkaLogLayout,log4net.Kafka.Core" >
-      <appid value="cyqf-grpc-test" />
-    </layout>
-  </appender>
-  <appender name="ErrorAppender" type="log4net.Kafka.Core.KafkaAppender, log4net.Kafka.Core">
-    <KafkaSettings>
-      <broker value="127.0.0.1:9092,127.0.0.1:9093" />
-      <topic value="Log_test1" />
-      <username value="admin"/>
-      <password value="admin"/>
-    </KafkaSettings>
-    <layout type="log4net.Kafka.Core.KafkaLogLayout,log4net.Kafka.Core" >
-      <appid value="cyqf-grpc-test" />
-    </layout>
-  </appender>
-  <appender name="FatalAppender" type="log4net.Kafka.Core.KafkaAppender, log4net.Kafka.Core">
+  <appender name="KafkaAppender" type="log4net.Kafka.Core.KafkaAppender, log4net.Kafka.Core">
     <KafkaSettings>
       <broker value="127.0.0.1:9092,127.0.0.1:9093" />
       <topic value="Log_test1" />
@@ -86,23 +42,23 @@ log4net.Kafka.Core 的重写,支持账号密码及pem证书
   </root>
   <logger name="logDebug">
     <level value="Debug"/>
-    <appender-ref ref="DebugAppender"/>
+    <appender-ref ref="KafkaAppender"/>
   </logger>
   <logger name="logInfo">
     <level value="Info"/>
-    <appender-ref ref="InfoAppender"/>
+    <appender-ref ref="KafkaAppender"/>
   </logger>
   <logger name="logWarn">
     <level value="Warn"/>
-    <appender-ref ref="WarnAppender"/>
+    <appender-ref ref="KafkaAppender"/>
   </logger>
   <logger name="logError">
     <level value="Error"/>
-    <appender-ref ref="ErrorAppender"/>
+    <appender-ref ref="KafkaAppender"/>
   </logger>
   <logger name="logFatal">
     <level value="Fatal"/>
-    <appender-ref ref="FatalAppender"/>
+    <appender-ref ref="KafkaAppender"/>
   </logger>
 </log4net>
 ```
