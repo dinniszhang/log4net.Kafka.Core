@@ -1,7 +1,7 @@
 ﻿# log4net.Kafka.Core
 log4net.Kafka.Core 的重写,支持账号密码及pem证书
 
-## 环境要求dotnet core 3+,使用说明：
+## 环境要求dotnet core 2.0+,使用说明：
 ### 1.生成并引用log4net.Kafka.Core,或搭建nuget私服
 ### 2.项目根目录建立log4net.config,和ca-cert.pem证书文件并调整属性为始终复制
 ### 3.记录日志推荐使用log4net.Kafka.Core.KafkaLogHelper封装类
